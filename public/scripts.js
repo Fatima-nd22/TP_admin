@@ -1,0 +1,25 @@
+document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+  
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert('Login successful!');
+        localStorage.setItem('token', result.token);
+      } else {
+        alert(result.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  });
+  
+  // Add similar handlers for Admin CRUD operations and User updates.
+  
